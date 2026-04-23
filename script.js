@@ -87,34 +87,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.getElementById('downloadPdfBtn');
     
     downloadBtn.addEventListener('click', () => {
-        // Change scale to 1 temporarily to ensure high quality rendering and layout precision
-        certificate.style.transform = `scale(1)`;
+        const originalText = downloadBtn.innerText;
+        downloadBtn.innerText = 'Generating PDF...';
+        downloadBtn.disabled = true;
+
+        // Clone the certificate to completely avoid scale, position, and overflow-hidden issues from the wrapper
+        const clone = certificate.cloneNode(true);
+        clone.style.transform = 'none';
+        clone.style.position = 'fixed';
+        clone.style.top = '0';
+        clone.style.left = '0';
+        clone.style.zIndex = '-9999';
+        document.body.appendChild(clone);
         
         const opt = {
             margin:       0,
             filename:     `${studentNameInput.value.replace(/\s+/g, '_')}_AICTE_Certificate.pdf`,
             image:        { type: 'jpeg', quality: 1.0 },
-            html2canvas:  { scale: 2, useCORS: true, logging: false },
+            html2canvas:  { scale: 2, useCORS: true, logging: false, scrollX: 0, scrollY: 0, windowWidth: 1123, windowHeight: 794 },
             jsPDF:        { unit: 'px', format: [1123, 794], orientation: 'landscape', compress: true }
         };
 
-        const originalText = downloadBtn.innerText;
-        downloadBtn.innerText = 'Generating PDF...';
-        downloadBtn.disabled = true;
-
-        html2pdf().set(opt).from(certificate).save().then(() => {
-            // Restore scaling and button state
-            scaleCertificate();
-            downloadBtn.innerText = originalText;
-            downloadBtn.disabled = false;
-        }).catch(err => {
-            console.error("PDF generation error: ", err);
-            scaleCertificate();
-            downloadBtn.innerText = 'Error Generating';
-            setTimeout(() => {
+        // Allow micro-task queue to flush so DOM computes the appended clone's style
+        setTimeout(() => {
+            html2pdf().set(opt).from(clone).save().then(() => {
+                // Cleanup
+                document.body.removeChild(clone);
                 downloadBtn.innerText = originalText;
                 downloadBtn.disabled = false;
-            }, 3000);
-        });
+            }).catch(err => {
+                console.error("PDF generation error: ", err);
+                document.body.removeChild(clone);
+                downloadBtn.innerText = 'Error Generating';
+                setTimeout(() => {
+                    downloadBtn.innerText = originalText;
+                    downloadBtn.disabled = false;
+                }, 3000);
+            });
+        }, 150);
     });
 });

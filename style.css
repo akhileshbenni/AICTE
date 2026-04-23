@@ -7,7 +7,7 @@
     --text-secondary: #94a3b8;
     --accent-color: #3b82f6;
     --accent-hover: #2563eb;
-    
+
     /* Document Colors */
     --doc-bg: #ffffff;
     --doc-text: #1e293b;
@@ -157,7 +157,8 @@ body {
     height: 794px;
     background-color: var(--doc-bg);
     color: var(--doc-text);
-    position: absolute; /* positioned absolutely for scaling via JS */
+    position: absolute;
+    /* positioned absolutely for scaling via JS */
     transform-origin: center center;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     padding: 24px;
@@ -184,10 +185,34 @@ body {
     height: 40px;
     border: 6px solid var(--doc-gold);
 }
-.top-left { top: -4px; left: -4px; border-bottom: none; border-right: none; }
-.top-right { top: -4px; right: -4px; border-bottom: none; border-left: none; }
-.bottom-left { bottom: -4px; left: -4px; border-top: none; border-right: none; }
-.bottom-right { bottom: -4px; right: -4px; border-top: none; border-left: none; }
+
+.top-left {
+    top: -4px;
+    left: -4px;
+    border-bottom: none;
+    border-right: none;
+}
+
+.top-right {
+    top: -4px;
+    right: -4px;
+    border-bottom: none;
+    border-left: none;
+}
+
+.bottom-left {
+    bottom: -4px;
+    left: -4px;
+    border-top: none;
+    border-right: none;
+}
+
+.bottom-right {
+    bottom: -4px;
+    right: -4px;
+    border-top: none;
+    border-left: none;
+}
 
 .certificate-content {
     flex: 1;
@@ -252,7 +277,7 @@ body {
 }
 
 .student-name {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--doc-accent);
     margin-bottom: 0.5rem;
