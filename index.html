@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AICTE Activity Certificate Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar controls -->
+        <aside class="controls-panel glassmorphism">
+            <div class="panel-header">
+                <h2>AICTE Certificate</h2>
+                <p>Generate precise, high-quality certificates.</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="collegeName">College Name</label>
+                <input type="text" id="collegeName" value="KODNEST INSTITUTE OF TECHNOLOGY" placeholder="Enter College Name">
+            </div>
+
+            <div class="input-group">
+                <label for="studentName">Student Name</label>
+                <input type="text" id="studentName" value="Akhil Sharma" placeholder="Enter Student Name">
+            </div>
+
+            <div class="input-group">
+                <label for="usn">USN</label>
+                <input type="text" id="usn" value="1KN21CS001" placeholder="Enter USN">
+            </div>
+
+            <div class="input-group">
+                <label for="courseName">Course Branch</label>
+                <input type="text" id="courseName" value="Computer Science and Engineering" placeholder="e.g. Mechanical Engineering">
+            </div>
+
+            <div class="input-group">
+                <label for="activityName">Activity Name</label>
+                <input type="text" id="activityName" value="AICTE 100 Hours Activity Program" placeholder="Enter Activity Name">
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label for="activityPoints">Points Earned</label>
+                    <input type="text" id="activityPoints" value="100" placeholder="Points">
+                </div>
+                <div class="input-group">
+                    <label for="certDate">Date</label>
+                    <input type="date" id="certDate">
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="downloadPdfBtn" class="primary-btn">Download PDF</button>
+            </div>
+        </aside>
+
+        <!-- Main Preview Area -->
+        <main class="preview-panel">
+            <div class="preview-wrapper" id="previewWrapper">
+                <!-- Actual Certificate A4 Container -->
+                <div class="certificate-container" id="certificate">
+                    <div class="certificate-border">
+                        <!-- Corner Decorations -->
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                        
+                        <div class="certificate-content">
+                            <div class="header">
+                                <h1 class="college-title" id="displayCollegeName">KODNEST INSTITUTE OF TECHNOLOGY</h1>
+                                <p class="sub-header">Affiliated to VTU, Belagavi, Approved by AICTE, New Delhi</p>
+                            </div>
+
+                            <div class="certificate-title-box">
+                                <h2 class="main-title">CERTIFICATE</h2>
+                                <h3 class="subtitle">OF COMPLETION</h3>
+                            </div>
+
+                            <div class="body-content">
+                                <p class="intro-text">This is to certify that</p>
+                                <h2 class="student-name" id="displayStudentName">Akhil Sharma</h2>
+                                <p class="usn-text">USN: <span id="displayUsn">1KN21CS001</span></p>
+                                
+                                <p class="description-text">
+                                    of the <strong id="displayCourseName">Computer Science and Engineering</strong> department has successfully completed the <strong id="displayActivityName">AICTE 100 Hours Activity Program</strong> and has earned <strong id="displayActivityPoints">100</strong> AICTE Activity Points.
+                                </p>
+                            </div>
+
+                            <div class="footer">
+                                <div class="signature-block date-block">
+                                    <span class="sign-line"></span>
+                                    <span class="sign-title">Date</span>
+                                    <span class="date-value" id="displayDate">April 23, 2026</span>
+                                </div>
+                                <div class="signature-block">
+                                    <span class="sign-line"></span>
+                                    <span class="sign-title">Faculty Coordinator</span>
+                                </div>
+                                <div class="signature-block">
+                                    <span class="sign-line"></span>
+                                    <span class="sign-title">Principal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- html2pdf.js via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

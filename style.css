@@ -1,0 +1,319 @@
+/* style.css */
+:root {
+    --bg-color: #0f172a;
+    --panel-bg: rgba(30, 41, 59, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    
+    /* Document Colors */
+    --doc-bg: #ffffff;
+    --doc-text: #1e293b;
+    --doc-accent: #0f172a;
+    --doc-gold: #b48600;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- Control Panel --- */
+.controls-panel {
+    width: 350px;
+    height: 100%;
+    padding: 2rem;
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    background: var(--panel-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 10;
+}
+
+.panel-header {
+    margin-bottom: 2rem;
+}
+
+.panel-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.panel-header p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.input-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #cbd5e1;
+}
+
+.input-group input {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.row {
+    display: flex;
+    gap: 1rem;
+}
+
+.row .input-group {
+    flex: 1;
+}
+
+.actions {
+    margin-top: 2rem;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.primary-btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* --- Preview Area --- */
+.preview-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #020617;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.preview-wrapper {
+    /* Responsive scaling logic applied via JS */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- The A4 Certificate --- */
+/* A4 Dimensions at 96 DPI: 794px x 1123px (Landscape: 1123px width, 794px height) */
+.certificate-container {
+    width: 1123px;
+    height: 794px;
+    background-color: var(--doc-bg);
+    color: var(--doc-text);
+    position: absolute; /* positioned absolutely for scaling via JS */
+    transform-origin: center center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.certificate-border {
+    width: 100%;
+    height: 100%;
+    border: 4px solid var(--doc-gold);
+    outline: 2px solid var(--doc-gold);
+    outline-offset: -12px;
+    position: relative;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Corner details */
+.corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 6px solid var(--doc-gold);
+}
+.top-left { top: -4px; left: -4px; border-bottom: none; border-right: none; }
+.top-right { top: -4px; right: -4px; border-bottom: none; border-left: none; }
+.bottom-left { bottom: -4px; left: -4px; border-top: none; border-right: none; }
+.bottom-right { bottom: -4px; right: -4px; border-top: none; border-left: none; }
+
+.certificate-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+/* Typography styles */
+.header .college-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--doc-accent);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.header .sub-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #475569;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1px;
+}
+
+.certificate-title-box {
+    margin-bottom: 2.5rem;
+}
+
+.certificate-title-box .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--doc-gold);
+    letter-spacing: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-title-box .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--doc-accent);
+    letter-spacing: 4px;
+}
+
+.body-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.8;
+}
+
+.intro-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+.student-name {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--doc-accent);
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+    border-bottom: 2px solid #e2e8f0;
+    display: inline-block;
+    padding: 0 1rem 0.5rem;
+}
+
+.usn-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #334155;
+}
+
+.description-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #334155;
+}
+
+.description-text strong {
+    color: var(--doc-accent);
+    font-weight: 600;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding: 0 2rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.signature-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    position: relative;
+}
+
+.sign-line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--doc-accent);
+    margin-bottom: 0.5rem;
+}
+
+.sign-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--doc-accent);
+}
+
+.date-block .date-value {
+    position: absolute;
+    top: -25px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    font-family: 'Playfair Display', serif;
+}
