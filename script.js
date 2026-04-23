@@ -91,33 +91,58 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadBtn.innerText = 'Generating PDF...';
         downloadBtn.disabled = true;
 
-        // Clone the certificate to completely avoid scale, position, and overflow-hidden issues from the wrapper
-        const clone = certificate.cloneNode(true);
-        clone.style.transform = 'none';
-        clone.style.position = 'fixed';
-        clone.style.top = '0';
-        clone.style.left = '0';
-        clone.style.zIndex = '-9999';
-        document.body.appendChild(clone);
+        // Temporarily alter the DOM to ensure html2canvas captures the full unscaled element
+        const appContainer = document.querySelector('.app-container');
+        const previewPanel = document.querySelector('.preview-panel');
+        const controlsPanel = document.querySelector('.controls-panel');
+        
+        // Save original styles
+        const origBodyOverflow = document.body.style.overflow;
+        const origAppOverflow = appContainer.style.overflow;
+        const origPreviewOverflow = previewPanel.style.overflow;
+        const origControlsDisplay = controlsPanel.style.display;
+        
+        // Apply temporary styles for pure rendering
+        document.body.style.overflow = 'visible';
+        appContainer.style.overflow = 'visible';
+        previewPanel.style.overflow = 'visible';
+        controlsPanel.style.display = 'none'; // Hide sidebar
+        
+        certificate.style.transform = 'none';
+        certificate.style.position = 'relative';
         
         const opt = {
             margin:       0,
             filename:     `${studentNameInput.value.replace(/\s+/g, '_')}_AICTE_Certificate.pdf`,
             image:        { type: 'jpeg', quality: 1.0 },
-            html2canvas:  { scale: 2, useCORS: true, logging: false, scrollX: 0, scrollY: 0, windowWidth: 1123, windowHeight: 794 },
+            html2canvas:  { scale: 2, useCORS: true, logging: false, scrollX: 0, scrollY: 0 },
             jsPDF:        { unit: 'px', format: [1123, 794], orientation: 'landscape', compress: true }
         };
 
-        // Allow micro-task queue to flush so DOM computes the appended clone's style
+        // Allow micro-task queue to flush so DOM computations finish
         setTimeout(() => {
-            html2pdf().set(opt).from(clone).save().then(() => {
-                // Cleanup
-                document.body.removeChild(clone);
+            window.scrollTo(0, 0); // Ensure we capture from top
+            html2pdf().set(opt).from(certificate).save().then(() => {
+                // Restore all styles
+                document.body.style.overflow = origBodyOverflow;
+                appContainer.style.overflow = origAppOverflow;
+                previewPanel.style.overflow = origPreviewOverflow;
+                controlsPanel.style.display = origControlsDisplay;
+                certificate.style.position = 'absolute';
+                scaleCertificate(); // Re-apply original scale calculation
+                
                 downloadBtn.innerText = originalText;
                 downloadBtn.disabled = false;
             }).catch(err => {
                 console.error("PDF generation error: ", err);
-                document.body.removeChild(clone);
+                // Restore all styles on error too
+                document.body.style.overflow = origBodyOverflow;
+                appContainer.style.overflow = origAppOverflow;
+                previewPanel.style.overflow = origPreviewOverflow;
+                controlsPanel.style.display = origControlsDisplay;
+                certificate.style.position = 'absolute';
+                scaleCertificate();
+                
                 downloadBtn.innerText = 'Error Generating';
                 setTimeout(() => {
                     downloadBtn.innerText = originalText;

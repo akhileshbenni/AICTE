@@ -222,10 +222,41 @@ body {
     justify-content: center;
 }
 
+/* Header Layout */
+.header-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-text-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.cert-logo {
+    object-fit: contain;
+}
+
+.side-logo {
+    width: 90px;
+    height: 90px;
+}
+
+.center-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+}
+
 /* Typography styles */
 .header .college-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--doc-accent);
     margin-bottom: 0.5rem;
@@ -234,20 +265,20 @@ body {
 
 .header .sub-header {
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #475569;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
     letter-spacing: 1px;
 }
 
 .certificate-title-box {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .certificate-title-box .main-title {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: var(--doc-gold);
     letter-spacing: 8px;
@@ -256,7 +287,7 @@ body {
 
 .certificate-title-box .subtitle {
     font-family: 'Inter', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: var(--doc-accent);
     letter-spacing: 4px;
@@ -266,14 +297,14 @@ body {
     max-width: 800px;
     margin: 0 auto;
     font-family: 'Playfair Display', serif;
-    line-height: 1.8;
+    line-height: 1.6;
 }
 
 .intro-text {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-style: italic;
     color: #64748b;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .student-name {
@@ -291,7 +322,7 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: #334155;
 }
 
