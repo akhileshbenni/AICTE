@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayActivityPoints = document.getElementById('displayActivityPoints');
     const displayDate = document.getElementById('displayDate');
 
+    // Generate Unique ID
+    const generateId = () => `GECR-AICTE-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+    let currentCertId = generateId();
+    const displayCertId = document.getElementById('displayCertId');
+    if(displayCertId) displayCertId.innerText = currentCertId;
+
     // Set Initial Date
     const today = new Date();
     dateInput.value = today.toISOString().split('T')[0];
@@ -123,6 +129,22 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             window.scrollTo(0, 0); // Ensure we capture from top
             html2pdf().set(opt).from(certificate).save().then(() => {
+                // Save to localStorage 
+                const records = JSON.parse(localStorage.getItem('aicte_certificates') || '[]');
+                records.push({
+                    id: currentCertId,
+                    name: studentNameInput.value,
+                    usn: usnInput.value,
+                    course: courseNameInput.value,
+                    date: dateInput.value,
+                    timestamp: new Date().toLocaleString()
+                });
+                localStorage.setItem('aicte_certificates', JSON.stringify(records));
+                
+                // Regenerate ID for the next potentially downloaded certificate
+                currentCertId = generateId();
+                if(displayCertId) displayCertId.innerText = currentCertId;
+
                 // Restore all styles
                 document.body.style.overflow = origBodyOverflow;
                 appContainer.style.overflow = origAppOverflow;

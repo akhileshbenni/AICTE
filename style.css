@@ -222,6 +222,19 @@ body {
     justify-content: center;
 }
 
+/* Certificate ID Badge */
+.cert-id-badge {
+    position: absolute;
+    top: 35px;
+    right: 45px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    letter-spacing: 1.5px;
+    z-index: 10;
+}
+
 /* Header Layout */
 .header-logos {
     display: flex;
