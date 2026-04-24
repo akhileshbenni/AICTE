@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const usnInput = document.getElementById('usn');
     const courseNameInput = document.getElementById('courseName');
     const activityNameInput = document.getElementById('activityName');
+    const activityDetailsInput = document.getElementById('activityDetails');
+    const totalHoursInput = document.getElementById('totalHours');
+    const durationInput = document.getElementById('duration');
     const activityPointsInput = document.getElementById('activityPoints');
     const dateInput = document.getElementById('certDate');
 
@@ -15,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayUsn = document.getElementById('displayUsn');
     const displayCourseName = document.getElementById('displayCourseName');
     const displayActivityName = document.getElementById('displayActivityName');
+    const displayActivityDetails = document.getElementById('displayActivityDetails');
+    const displayTotalHours = document.getElementById('displayTotalHours');
+    const displayDuration = document.getElementById('displayDuration');
     const displayActivityPoints = document.getElementById('displayActivityPoints');
     const displayDate = document.getElementById('displayDate');
 
@@ -56,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bindInput(usnInput, displayUsn);
     bindInput(courseNameInput, displayCourseName);
     bindInput(activityNameInput, displayActivityName);
+    bindInput(activityDetailsInput, displayActivityDetails);
+    bindInput(totalHoursInput, displayTotalHours);
+    bindInput(durationInput, displayDuration);
     bindInput(activityPointsInput, displayActivityPoints);
     bindInput(dateInput, displayDate, true);
 
@@ -136,6 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     name: studentNameInput.value,
                     usn: usnInput.value,
                     course: courseNameInput.value,
+                    activity: activityNameInput.value,
+                    details: activityDetailsInput.value,
+                    hours: totalHoursInput.value,
+                    duration: durationInput.value,
+                    points: activityPointsInput.value,
                     date: dateInput.value,
                     timestamp: new Date().toLocaleString()
                 });

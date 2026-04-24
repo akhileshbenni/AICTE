@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const resName = document.getElementById('resName');
     const resUsn = document.getElementById('resUsn');
     const resCourse = document.getElementById('resCourse');
+    const resActivity = document.getElementById('resActivity');
+    const resDetails = document.getElementById('resDetails');
+    const resHours = document.getElementById('resHours');
+    const resDuration = document.getElementById('resDuration');
+    const resPoints = document.getElementById('resPoints');
     const resDate = document.getElementById('resDate');
     const resTimestamp = document.getElementById('resTimestamp');
 
@@ -30,6 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
             resName.innerText = found.name;
             resUsn.innerText = found.usn;
             resCourse.innerText = found.course;
+            resActivity.innerText = found.activity || 'N/A';
+            resDetails.innerText = found.details || 'N/A';
+            resHours.innerText = found.hours || 'N/A';
+            resDuration.innerText = found.duration || 'N/A';
+            resPoints.innerText = found.points || 'N/A';
             resDate.innerText = found.date;
             resTimestamp.innerText = found.timestamp || 'Unknown';
             
