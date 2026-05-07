@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Two-way binding handler
     const bindInput = (inputEl, displayEl, isDate = false) => {
+        if (!inputEl || !displayEl) return;
         inputEl.addEventListener('input', (e) => {
             const value = e.target.value;
             if (isDate && value) {
@@ -142,15 +143,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const records = JSON.parse(localStorage.getItem('aicte_certificates') || '[]');
                 records.push({
                     id: currentCertId,
-                    name: studentNameInput.value,
-                    usn: usnInput.value,
-                    course: courseNameInput.value,
-                    activity: activityNameInput.value,
-                    details: activityDetailsInput.value,
-                    hours: totalHoursInput.value,
-                    duration: durationInput.value,
-                    points: activityPointsInput.value,
-                    date: dateInput.value,
+                    name: studentNameInput ? studentNameInput.value : '',
+                    usn: usnInput ? usnInput.value : '',
+                    course: courseNameInput ? courseNameInput.value : '',
+                    activity: activityNameInput ? activityNameInput.value : '',
+                    details: activityDetailsInput ? activityDetailsInput.value : '',
+                    hours: totalHoursInput ? totalHoursInput.value : '',
+                    duration: durationInput ? durationInput.value : '',
+                    points: activityPointsInput ? activityPointsInput.value : '',
+                    date: dateInput ? dateInput.value : '',
                     timestamp: new Date().toLocaleString()
                 });
                 localStorage.setItem('aicte_certificates', JSON.stringify(records));
